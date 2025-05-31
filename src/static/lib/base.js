@@ -90,6 +90,7 @@ export class Observable {
     this.#sessionKey = sessionKey;
   }
 
+  /** @param subscriber {{id: number, consumer: (data) => void}} */
   subscribe(subscriber) {
     if (this.existsWithId(subscriber.id)) {
       return;
@@ -97,6 +98,7 @@ export class Observable {
     this.#observers.push(subscriber);
   }
 
+  /** @param id {string} */
   unsubscribe(id) {
     let iOut = 0;
     for (let i = 0; i < this.#observers.length; i++) {
@@ -107,6 +109,10 @@ export class Observable {
     this.#observers.length = iOut;
   }
 
+  /**
+   * @param data {any}
+   * @return {any}
+   */
   emit(data) {
     this.#data = data;
     this.#observers.forEach((observer) => observer.consumer(data));
