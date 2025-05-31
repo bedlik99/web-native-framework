@@ -1,0 +1,120 @@
+.body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+
+  .header {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 8vh;
+    border-bottom: 2px solid #dedede;
+
+    .header-option {
+      display: flex;
+      margin: auto;
+      height: 100%;
+    }
+
+    .header-option:hover > .nav-btn {
+      -webkit-box-shadow: 0px 0px 5px 1px rgba(154, 154, 154, 1);
+      -moz-box-shadow: 0px 0px 5px 1px rgba(154, 154, 154, 1);
+      box-shadow: 0px 0px 5px 1px rgba(154, 154, 154, 1);
+    }
+  }
+
+  .nav-btn {
+    outline: none;
+    font-size: 0.9rem;
+    border: none;
+    cursor: pointer;
+    min-width: 8rem;
+    width: fit-content;
+    height: 50%;
+    background-color: transparent;
+    border-radius: 5px;
+    margin: auto;
+    transition: 0.3s all;
+  }
+
+  .nav-btn-selected {
+    outline: none;
+    font-size: 0.9rem;
+    border: none;
+    cursor: pointer;
+    min-width: 8rem;
+    width: fit-content;
+    height: 50%;
+    background-color: #95a5a6;
+    color: white;
+    border-radius: 5px;
+    margin: auto;
+    transition: 0.3s all;
+  }
+
+  .nav-btn:hover {
+    -webkit-box-shadow: 0px 0px 5px 1px rgba(154, 154, 154, 1);
+    -moz-box-shadow: 0px 0px 5px 1px rgba(154, 154, 154, 1);
+    box-shadow: 0px 0px 5px 1px rgba(154, 154, 154, 1);
+    transform: translateY(-1px);
+  }
+
+  .nav-btn:active {
+    transform: translateY(1px);
+  }
+
+  .country-section-wrapper {
+    display: flex;
+    min-height: fit-content;
+    height: 92vh;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .country-map-wrapper {
+    -webkit-box-shadow: 5px 8px 10px 0px rgba(125, 125, 125, 1);
+    -moz-box-shadow: 5px 8px 10px 0px rgba(125, 125, 125, 1);
+    box-shadow: 5px 8px 10px 0px rgba(125, 125, 125, 1);
+    width: 100%;
+    height: 100%;
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.2s ease-out;
+  }
+
+  .country-map-wrapper-hidden {
+    -webkit-box-shadow: 5px 8px 10px 0px rgba(125, 125, 125, 1);
+    -moz-box-shadow: 5px 8px 10px 0px rgba(125, 125, 125, 1);
+    box-shadow: 5px 8px 10px 0px rgba(125, 125, 125, 1);
+    width: 0;
+    height: 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s 0.1s, opacity 0.1s ease-out;
+  }
+
+  .selected-province-info-wrapper {
+    width: 100%;
+    height: 100%;
+  }
+
+}
+
+
+body::-webkit-scrollbar {
+  width: 0.6rem;
+}
+
+body::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #a8bbbf;
+  border-radius: 20px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background-color: #c4c4c4;
+}
