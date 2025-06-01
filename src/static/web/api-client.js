@@ -1,4 +1,4 @@
-import {apiFetch} from "../lib/web";
+import {apiFetch} from "../common/web";
 
 /** @class Api */
 export class Api {

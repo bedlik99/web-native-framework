@@ -1,4 +1,4 @@
-import {uid} from "../../lib/encryption";
+import {uid} from "../../common/encryption";
 
 
 export const customNotificationIds = {

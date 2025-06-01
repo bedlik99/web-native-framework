@@ -4,7 +4,7 @@ module.exports = (env) => {
     case 'my-app': {
       resultModule = {
         entry: {
-          'home-route': [
+          'client-side-route-path': [
             //--> /test-url-to-local-files.js
             `../static/loader.js`,
             `../static/pages/home.js`
@@ -12,7 +12,7 @@ module.exports = (env) => {
         },
         output: {
           //filename: "[name].[contenthash].js",
-          filename: "[name].v1.js",
+          filename: "[name].js",
           path: __dirname + `/../static/dist`
         },
         mode: 'production'

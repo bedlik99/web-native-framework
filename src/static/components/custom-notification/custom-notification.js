@@ -1,4 +1,4 @@
-import {WebComponent} from '../../lib/base.js';
+import {WebComponent} from '../../common/base.js';
 import {customNotificationStyles} from "./custom-notification.css";
 import {customNotificationHtmlTemplate} from "./custom-notification.html";
 import {CustomNotificationService} from "./custom-notification.service";

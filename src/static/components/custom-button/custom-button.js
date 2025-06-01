@@ -1,6 +1,6 @@
 import {styles} from './custom-button.css.js';
 import {buttonHtmlTemplate, buttonIds} from './custom-button.html.js';
-import {dispatch, WebComponent} from '../../lib/base.js';
+import {dispatch, WebComponent} from '../../common/base.js';
 
 
 export class CustomButton extends WebComponent {

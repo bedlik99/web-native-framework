@@ -198,6 +198,18 @@ export function isElementPresentInParent(parentId, elementId) {
 }
 
 /**
+ * @param src {string}
+ * @param type {string}
+ */
+export const addHeader = (src, type) => {
+  /** @type {HTMLScriptElement} */
+  const script = document.createElement('script');
+  script.type = type;
+  script.src = src;
+  document.head.appendChild(script);
+}
+
+/**
  * @param {string} url
  * @param {string} type
  */
@@ -205,26 +217,27 @@ export const importScript = (url, type) => {
   if (!url || !type) {
     return;
   }
-  const doesHeaderExists = Array.from(document.head.children)
-      .filter(htmlHeader => htmlHeader.src)
-      .map(htmlHeader => {
-        return {
-          type: htmlHeader.type,
-          url: '/' +
-              String(htmlHeader.src)
-                  .split('/')
-                  .filter((el, index) => index > 2)
-                  .join('/')
-        };
-      })
-      .find(scriptInfo => scriptInfo.type === type && scriptInfo.url === url);
-  if (!doesHeaderExists) {
-    /** @type {HTMLScriptElement} */
-    const script = document.createElement('script');
-    script.type = type;
-    script.src = url;
-    document.head.appendChild(script);
+  /** @type {string} */
+  let parsedSrcUrl;
+  /** @type {boolean} */
+  let doesHeaderExist = false;
+  for (const htmlHeader of Array.from(document.head.children)) {
+    if (!htmlHeader?.src) {
+      continue;
+    }
+    parsedSrcUrl = '/' + String(htmlHeader.src)
+        .split('/')
+        .filter((el, index) => index > 2)
+        .join('/');
+    if (htmlHeader.type === type && parsedSrcUrl === url) {
+      doesHeaderExist = true;
+      break;
+    }
   }
+  if (doesHeaderExist) {
+    return;
+  }
+  addHeader(url, type);
 }
 
 

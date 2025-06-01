@@ -1,10 +1,10 @@
 /** Required imports. Order of imports need to be preserved. */
-import './lib/base.js';
-import './lib/encryption.js';
-import './lib/object.js';
-import './lib/session.js';
-import './lib/string.js';
-import './lib/web.js';
+import './common/base.js';
+import './common/encryption.js';
+import './common/object.js';
+import './common/session.js';
+import './common/string.js';
+import './common/web.js';
 
 import './app.js';
 import './router.js';

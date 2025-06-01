@@ -1,15 +1,15 @@
-import {importScript} from './lib/base.js';
+import {importScript} from './common/base.js';
 
 export const pageComponentsTags = {
   pageTag: 'page-tag'
 };
 
-/** @type { Map<string, { componentTag: string, requiredResources: Array<string> | null, requiredResourcesPROD: Array<string> | null}>} */
+/** @type { Map<string, { componentTag: string, requiredResourcesTest: Array<string> | null, requiredResources: Array<string> | null}>} */
 export const routePaths = new Map([
   ['/client-side-route-path', {
     componentTag: pageComponentsTags.pageTag,
-    requiredResourcesTest: ['/test-url-to-local-files.js'],
-    requiredResources: ['/prod-url-to-dist-files.js']
+    requiredResourcesTest: ['/static/pages/home.js'],
+    requiredResources: ['/static/dist/client-side-route-path.js']
   }]
 ]);
 

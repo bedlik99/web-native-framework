@@ -1,5 +1,5 @@
 import {styles} from './app.css.js';
-import {WebComponent} from './lib/base.js';
+import {WebComponent} from './common/base.js';
 
 /** @type {string} */
 const rootSectionId = 'root-section-id';

@@ -1,4 +1,4 @@
-import {createHtmlElementFromText} from "../../lib/base";
+import {createHtmlElementFromText} from "../../common/base";
 
 
 export class CustomNotificationService {

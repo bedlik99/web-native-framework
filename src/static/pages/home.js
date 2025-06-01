@@ -1,5 +1,5 @@
 import {homeStyles} from './home.css.js';
-import { WebComponent } from '../lib/base.js';
+import { WebComponent } from '../common/base.js';
 import {pageComponentsTags} from "../router";
 import {homeHtmlTemplate} from "./home.html";
 
