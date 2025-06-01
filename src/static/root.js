@@ -1,4 +1,4 @@
-import {styles} from './app.css.js';
+import {styles} from './root.css.js';
 import {WebComponent} from './common/base.js';
 
 /** @type {string} */
@@ -7,7 +7,7 @@ const rootSectionId = 'root-section-id';
 /** @type {string} */
 const htmlTemplate = /*html*/`<div id=${rootSectionId} class='root-section'></div>`;
 
-class App extends WebComponent {
+class Root extends WebComponent {
   /** @type {HTMLDivElement} */
   #rootSection;
 
@@ -38,4 +38,4 @@ class App extends WebComponent {
 
 }
 
-customElements.get('root-section') || customElements.define('root-section', App);
+customElements.get('root-section') || customElements.define('root-section', Root);

@@ -6,7 +6,7 @@ import './common/session.js';
 import './common/string.js';
 import './common/web.js';
 
-import './app.js';
+import './root.js';
 import './router.js';
 
 /** Common files/components, that need to be loaded on any route request. */
