@@ -1,28 +1,18 @@
-import {createHtmlElementFromText, WebComponent} from '../../lib/base.js';
+import {WebComponent} from '../../lib/base.js';
 import {customNotificationStyles} from "./custom-notification.css";
 import {customNotificationHtmlTemplate} from "./custom-notification.html";
+import {CustomNotificationService} from "./custom-notification.service";
 
 
 export class CustomNotification extends WebComponent {
   /** @type {HTMLButtonElement} */
   #confirmButton;
+  /** @type {CustomNotificationService} */
+  #customNotificationService;
 
   constructor() {
     super(customNotificationHtmlTemplate, customNotificationStyles);
-  }
-
-  /**
-   * @param {string} text
-   * @param {string} eventName
-   * @param {any} onNotificationConfirmation
-   * @returns {ChildNode | null}
-   */
-  static createNotification(text, eventName, onNotificationConfirmation) {
-    const notificationElement = createHtmlElementFromText(/*template*/`
-        <custom-notification information_text=${text} confirm_event_name=${eventName}></custom-notification>
-    `);
-    notificationElement.addEventListener(eventName, onNotificationConfirmation);
-    return notificationElement;
+    this.#customNotificationService = CustomNotificationService.getInstance();
   }
 
   onConfirmButtonClick() {
@@ -45,7 +35,6 @@ export class CustomNotification extends WebComponent {
       .replace(new RegExp('_', 'g'), ' ')
       .replace(new RegExp('{NL}', 'g'), '<br>');
   }
-
 
   get information_text() {
     return this.getAttribute('information_text');

@@ -139,51 +139,41 @@ export class Observable {
     return this.#data;
   }
 
+  /**
+   * @param id {string}
+   * @return {boolean}
+   */
   existsWithId(id) {
     return this.#observers.some(obs => obs.id === id);
   }
 }
 
 /**
- * @async
- * @param {Function | null} [onLoading=undefined]
- * @param {{url: string, params: { method: string, body: any, headers: { 'Content-Type': string, 'Authorization': string | undefined}}}}
- * @returns {Promise<{data: any, isOk: boolean, errors: any}>}
+ * Dispatches event that will propagate across the shadow DOM boundary and will not go outside shadow DOM boundary
+ * @param {HTMLElement} elementToDispatchEventOn
+ * @param {string} eventId
+ * @param {any} payload
  */
-export const apiFetch = async (onLoading = undefined, {url, params}) => {
-  if (!url || !params) {
-    throw new Error('Provided no call configuration!');
-  }
-  if (!!onLoading && typeof onLoading === 'function') {
-    onLoading();
-  }
-  try {
-    /** @type {Response} */
-    const response = await fetch(url, {
-      method: params.method,
-      body: JSON.stringify(params.body),
-      headers: params.headers
-    });
-    if (!response.ok) {
-      console.error(`Unsuccessful request to: ${url} - HTTP response code: ${response.status} - Message: ${(await response.text())}`);
-      return {data: undefined, isOk: false, errors: err};
-    }
-    /** @type {any} */
-    let result;
-    try {
-      result = await response.json();
-    } catch (jsonParseException) {
-      if (result) {
-        console.warn("Returned value not in JSON format: " + result);
-      }
-      result = await response.text();
-    }
-    return {data: result, isOk: true, errors: null};
-  } catch (err) {
-    console.error(`Error occurred during call to: ${url}, error: ${err}`);
-    return {data: undefined, isOk: false, errors: err};
-  }
-}
+export const dispatch = (elementToDispatchEventOn, eventId, payload) => {
+  elementToDispatchEventOn.dispatchEvent(new CustomEvent(eventId, {detail: payload}))
+};
+
+/**
+ * Dispatches event that will propagate across the shadow DOM boundary into the standard DOM
+ * @param {HTMLElement} elementToDispatchEventOn
+ * @param {string} eventId
+ * @param {any} payload
+ */
+export const dispatchComposed = (elementToDispatchEventOn, eventId, payload) => {
+  elementToDispatchEventOn.dispatchEvent(
+      new CustomEvent(eventId, {
+            detail: payload,
+            bubbles: true,
+            composed: true
+          }
+      )
+  );
+};
 
 /**
  * @param {string} htmlString
@@ -205,21 +195,6 @@ export function isElementPresentInParent(parentId, elementId) {
   const htmlElementsArray = [...this.shadowRoot.getElementById(parentId).children];
   const element = htmlElementsArray.find(el => el.id === elementId);
   return !!element;
-}
-
-/**
- * Returns date as string in [yyyy-MM-dd] format
- * @param {number | string} year
- * @param {number | string} month
- * @param {number | string} day
- * @returns {string}
- */
-export function toInternationalDateFormat(year, month, day) {
-  return (
-      String(year) + '-' +
-      (String(month).length === 1 ? ('0' + String(month)) : String(month)) + '-' +
-      (String(day).length === 1 ? ('0' + String(day)) : String(day))
-  );
 }
 
 /**
@@ -252,41 +227,6 @@ export const importScript = (url, type) => {
   }
 }
 
-/**
- * Dispatches event that will propagate across the shadow DOM boundary and will not go outside shadow DOM boundary
- * @param {HTMLElement} elementToDispatchEventOn
- * @param {string} eventId
- * @param {any} payload
- */
-export const dispatch = (elementToDispatchEventOn, eventId, payload) => {
-  elementToDispatchEventOn.dispatchEvent(new CustomEvent(eventId, {detail: payload}))
-};
-
-/**
- * Dispatches event that will propagate across the shadow DOM boundary into the standard DOM
- * @param {HTMLElement} elementToDispatchEventOn
- * @param {string} eventId
- * @param {any} payload
- */
-export const dispatchComposed = (elementToDispatchEventOn, eventId, payload) => {
-  elementToDispatchEventOn.dispatchEvent(
-      new CustomEvent(eventId, {
-            detail: payload,
-            bubbles: true,
-            composed: true
-          }
-      )
-  );
-};
-
-/**
- * @param {string} prefix
- * @param {string} suffix
- * @returns {string}
- */
-export const uid = (prefix = '', suffix = '') => {
-  return prefix + Date.now().toString(36) + Math.random().toString(36).substring(2) + suffix;
-}
 
 (() => {
   window.app = {

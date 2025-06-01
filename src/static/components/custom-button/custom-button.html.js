@@ -1,4 +1,5 @@
-import {uid} from "../../lib/base.js";
+import {uid} from "../../lib/encryption";
+
 
 export const buttonIds = {
   customBtnId: uid('customBtnId-')

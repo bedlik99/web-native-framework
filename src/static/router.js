@@ -2,7 +2,7 @@ import {importScript} from './lib/base.js';
 
 export const pageComponentsTags = {
   pageTag: 'page-tag'
-}
+};
 
 /** @type { Map<string, { componentTag: string, requiredResources: Array<string> | null, requiredResourcesPROD: Array<string> | null}>} */
 export const routePaths = new Map([
@@ -33,7 +33,7 @@ const route = (event, targetPath) => {
 const addScripts = (routePathKey) => {
   switch (app.env) {
     case 'TEST':
-      routePaths.get(routePathKey)?.requiredResourcesTest?.forEach(resource => import(resource));
+      routePaths.get(routePathKey)?.requiredResourcesTest?.forEach(resource => importScript(resource, 'module'));
       break;
     case 'PROD':
       routePaths.get(routePathKey)?.requiredResources?.forEach(resource => importScript(resource, 'module'));
@@ -59,7 +59,6 @@ const renderPage = (pageComponentTag) => {
   rootSectionElement.dispatchEvent(new CustomEvent('render-request', {'detail': pageComponentTag}));
 }
 
-/** @async */
 const handleLocation = async () => {
   /** @type {string} */
   const path = window.location.pathname;

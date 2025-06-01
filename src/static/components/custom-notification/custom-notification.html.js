@@ -1,8 +1,17 @@
-import {uid} from "../../lib/base.js";
+import {uid} from "../../lib/encryption";
+
 
 export const customNotificationIds = {
-  customBtnId: uid('customBtnId-')
+  notificationTextId: uid('notificationTextId-'),
+  confirmBtnId: uid('confirmBtnId-'),
 };
 
 /** @type {string} */
-export const customNotificationHtmlTemplate = /*html*/`<button id=${customNotificationIds.customBtnId} class="custom-btn"><div>Click</div></button>`;
+export const customNotificationHtmlTemplate = /*html*/`
+<div class='backdrop'>
+  <div class='card'>
+    <p id=${customNotificationIds.notificationTextId} class='notification-text-p'></p>
+    <button id=${customNotificationIds.confirmBtnId} class='confirm-btn'>OK</button>
+  </div>
+</div>
+`;

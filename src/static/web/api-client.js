@@ -1,7 +1,7 @@
-import { apiFetch } from "../lib/base.js";
+import {apiFetch} from "../lib/web";
 
 /** @class Api */
-class Api {
+export class Api {
   static #instance;
 
   constructor() {
@@ -20,23 +20,19 @@ class Api {
   }
 
   /**
-   * @async
    * @param {Function | null} applyOnLoading
    * @return {Promise<{data: any, isOk: boolean, errors: any}>}
    */
-   exampleApiMethod(applyOnLoading) {
+   async exampleApiMethod(applyOnLoading) {
     return apiFetch(applyOnLoading, {
       url: `/your_url`,
       params: {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'X-Client-Id': `SOME_CLIENT_ID`,
+          'X-Client-Id': `CUSTOM_CLIENT_ID`,
         }
       }
     });
   }
 }
-
-/** @type {Api} */
-export const api = Api.getInstance();
