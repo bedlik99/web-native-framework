@@ -8,7 +8,7 @@ export const uid = (prefix = '', suffix = '') => {
 }
 
 /**
- * @return {`${string}-${string}-${string}-${string}-${string}`}
+ * @return {string}
  */
 export const cryptoUuid = () => {
   return crypto.randomUUID();
