@@ -42,7 +42,7 @@ export const getUserId = () => {
     sessionStorage.removeItem(accessTokenSessionName);
     return null;
   }
-  if (decoded.iss !== 'bed_service') {
+  if (decoded.iss !== '_ISSUER_IDENTIFIER_') {
     sessionStorage.removeItem(accessTokenSessionName);
     return null;
   }
