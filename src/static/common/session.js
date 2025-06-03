@@ -12,13 +12,13 @@ export const validateSessionToken = () => {
     sessionStorage.removeItem(accessTokenSessionName);
     return false;
   }
-  if (decoded.iss !== 'bed_service') {
+  if (decoded.iss !== '_ISSUER_IDENTIFIER_') {
     sessionStorage.removeItem(accessTokenSessionName);
     return false;
   }
-  // seconds or miliseconds
+  // seconds or milliseconds
   const expirationTime = String(decoded.exp);
-  // trimmed to seconds or left in miliseconds
+  // trimmed to seconds or left in milliseconds
   const currentTime = new Date().getTime().toString().substring(0, expirationTime.length);
   const timeLeft = Number(expirationTime) - Number(currentTime);
   if (timeLeft <= 0) {

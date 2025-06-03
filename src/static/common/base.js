@@ -98,7 +98,7 @@ export class Observable {
     this.#observers.push(subscriber);
   }
 
-  /** @param id {string} */
+  /** @param id {number} */
   unsubscribe(id) {
     let iOut = 0;
     for (let i = 0; i < this.#observers.length; i++) {
@@ -140,7 +140,7 @@ export class Observable {
   }
 
   /**
-   * @param id {string}
+   * @param id {number}
    * @return {boolean}
    */
   existsWithId(id) {
