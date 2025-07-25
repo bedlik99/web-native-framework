@@ -153,9 +153,14 @@ export class Observable {
  * @param {HTMLElement} elementToDispatchEventOn
  * @param {string} eventId
  * @param {any} payload
+ * @param shouldLog
  */
-export const dispatch = (elementToDispatchEventOn, eventId, payload) => {
-  elementToDispatchEventOn.dispatchEvent(new CustomEvent(eventId, {detail: payload}))
+export const dispatch = (elementToDispatchEventOn, eventId, payload,
+                         shouldLog = (window.app.env === 'TEST' || window.app.env === 'DEV')) => {
+  if (shouldLog) {
+    console.log('Dispatching event: [' + eventId + ']');
+  }
+  elementToDispatchEventOn.dispatchEvent(new CustomEvent(eventId, {detail: payload}));
 };
 
 /**
@@ -163,16 +168,14 @@ export const dispatch = (elementToDispatchEventOn, eventId, payload) => {
  * @param {HTMLElement} elementToDispatchEventOn
  * @param {string} eventId
  * @param {any} payload
+ * @param shouldLog
  */
-export const dispatchComposed = (elementToDispatchEventOn, eventId, payload) => {
-  elementToDispatchEventOn.dispatchEvent(
-      new CustomEvent(eventId, {
-            detail: payload,
-            bubbles: true,
-            composed: true
-          }
-      )
-  );
+export const dispatchComposed = (elementToDispatchEventOn, eventId, payload,
+                                 shouldLog = (window.app.env === 'TEST' || window.app.env === 'DEV')) => {
+  if (shouldLog) {
+    console.log('Dispatching event: [' + eventId + ']');
+  }
+  elementToDispatchEventOn.dispatchEvent(new CustomEvent(eventId, {detail: payload, bubbles: true, composed: true}));
 };
 
 /**
